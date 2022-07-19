@@ -38,4 +38,50 @@ Explanation: Reads 01 from right to left. Therefore it is not a palindrome.
 // Example 3:
 //var x = 10;
 
-var isPalindrome = function (x) {};
+/*
+number % 10 = 0 is not a palindrome
+reverse = 0
+while (x > reverse)
+separate last digit in x remaind = x % 10 (also first digit in reverse number)
+assign new value for x /= 10
+capture digit in reverse number = reverse * 10 + remaind
+if x = reverse (even x) or x = reverse/10 (odd x), return true
+esle return false
+*/
+
+/*
+var reverse = 0;
+while (x > reverse) {
+  var digit = x % 10;
+  x /= 10;
+  reverse = reverse * 10 + digit;
+*/
+
+// ------------------------------ SOLUTION 2 ------------------------------
+
+var isPalindrome = function (x) {
+  //Case when x is a negative number
+  if (x < 0) {
+    return false;
+  }
+  // Case when x % 10 = 0
+  if (x % 10 == 0 && x !== 0) {
+    return false;
+  }
+  // Other cases
+  let xString = x.toString(); // convert number to string
+  let xIndex = xString.length;
+  let reverse = "";
+  while (xIndex > 0) {
+    reverse += xString[xIndex - 1];
+    xIndex--;
+  }
+  let reverseNum = parseInt(reverse); //convert string back to number
+  if (x == reverseNum) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+console.log(isPalindrome(x));
